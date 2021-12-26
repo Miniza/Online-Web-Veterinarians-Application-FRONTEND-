@@ -1,0 +1,22 @@
+body{
+  margin: 30px;
+  padding: 0px;
+  background-image: url(http://1.bp.blogspot.com/-kQpJFaXt3Mk/UMW2kdMYdyI/AAAAAAAAKZI/hdUnlQfv6ns/s1600/cute-puppies-pictures-6.jpg)
+} 
+
+.jumbotron{
+  height:auto;
+  padding: 5px;
+  background: linear-gradient(to right,brown ,black);
+
+ 
+  }
+
+  .myglass{
+    box-shadow: 0 0 5px 0;
+    background: inherit;
+    backdrop-filter: blur(10px);
+    text-align: center;
+  }
+
+  
