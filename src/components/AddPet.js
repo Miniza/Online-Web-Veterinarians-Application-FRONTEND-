@@ -51,11 +51,6 @@ const handleFormSubmit = e => {
           
           <div className='jumbotron text-white'>
           <form onSubmit={handleFormSubmit} className="was-validated">
-            <input
-            name = "id"
-            type="hidden"
-            value = {formInfo.id}
-            />
             <div className="form-group">
             <label for="pname" className ="form-label">Pet Name</label>
             <input
@@ -156,6 +151,7 @@ const handleFormSubmit = e => {
 }
 AddPet.propTypes = {
   powner: PropTypes.string,
+  pid: propTypes.string,
   pname: propTypes.string,
   oidnumber: propTypes.string, //Please note i accept id number as string 
   ptype: propTypes.string,

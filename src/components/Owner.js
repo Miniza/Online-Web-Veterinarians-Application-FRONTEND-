@@ -11,16 +11,8 @@ import { Link } from 'react-router-dom';
 
 const Owner = () => {
 
-const [formData, setFormData] = useState({
-  oname:"",
-  osurname: "",
-  oidnumber: "",
-  ocellnum:"",
-  omail:"",
-  opostal: "",
-});
-
 const [ownerlist, setOwnerlist] = useState([]);
+const [petlist, setPetList] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
@@ -31,6 +23,8 @@ const loadOwner = async() => {
   try{
     const res = await client.get('/api/owners');
       setOwnerlist(res.data.owners);
+      const resp = await client.get('/api/pets');
+      setPetList(resp.data.pets);
       setLoading(false);
       setError(null);
   } catch(err){
@@ -90,6 +84,7 @@ useEffect(()=>{
           <th>Phone Number</th>
           <th>Email Address</th>
           <th>Postal Address</th>
+          <th>PetList</th>
           <th>Operation</th>
         </tr>
       </thead>
@@ -107,12 +102,14 @@ useEffect(()=>{
             <td>{item.ocellnum}</td>
             <td>{item.omail}</td>
             <td>{item.opostal}</td>
+            <td>{petlist.map(value=>{if(item.oidnumber==value.oidnumber){return(<pre class="text-white">{value.pname}</pre>)}else{return <>No Pets</>}})}</td>
             <td><span><Link to={`EditOwner/${item.id}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
               <button onClick={e=>{deleteOwner(e, item.id)}} className="btn btn-danger"><i className="fa fa-trash " ></i></button></span></td>
           </tr>)
 })}
       </tbody>
     </table>
+    
   </div>
   </div>
   </div>
