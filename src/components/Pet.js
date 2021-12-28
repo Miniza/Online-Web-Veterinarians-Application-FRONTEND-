@@ -12,26 +12,17 @@ import propTypes from 'prop-types';
 
 const Pet = () => {
 
-const [formInfo,setFormInfo] = useState({
-  pname:"",
-  pid:"",
-  ptype:"",
-  pbreed:"",
-  powner:"",
-  oidnumber: "",
-  pdob:""
-});
 const [petlist, setPetList] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
 
-const client = axios.create({baseURL: 'http://localhost:8000/'})
+const client = axios.create({baseURL: 'http://localhost:5054/'})
 
 const loadPets = async() => {
   try{
-    const res = await client.get('/api/pets');
-    setPetList(res.data.pets);
+    const res = await client.get('/api/Pets');
+    setPetList(res.data);
     setError(null);
   } catch(err){
     setError(err.message);
@@ -47,7 +38,7 @@ useEffect(()=>{
 const deletePet = (e,id) => {
   e.preventDefault(); 
   if(window.confirm("Are You Sure You Want To Delete This Data")){
-    const res = client.delete(`/api/delete-pets/${id}`);
+    const res = client.delete(`/api/Pets/${id}`);
   }
   }
 
@@ -87,7 +78,7 @@ const deletePet = (e,id) => {
           return value
         }}).map(item=>{return(
             <tr key={item.id}>
-            <td><Link to={`SingleOwner/${item.id}`}>{item.powner}</Link></td>
+            <td><Link to={`SingleOwner/${item.Id}`}>{item.powner}</Link></td>
             <td>{item.pname}</td>
             <td>{item.ptype}</td>
             <td>{item.pbreed}</td>

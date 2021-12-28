@@ -17,14 +17,14 @@ const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
 
-const client = axios.create({baseURL: 'http://localhost:8000/'});
+const client = axios.create({baseURL: 'http://localhost:5054/'});
 
 const loadOwner = async() => {
   try{
-    const res = await client.get('/api/owners');
-      setOwnerlist(res.data.owners);
-      const resp = await client.get('/api/pets');
-      setPetList(resp.data.pets);
+    const res = await client.get('/api/Owners');
+      setOwnerlist(res.data);
+      const resp = await client.get('/api/Pets');
+      setPetList(resp.data);
       setLoading(false);
       setError(null);
   } catch(err){
@@ -42,7 +42,7 @@ useEffect(()=>{
   e.preventDefault(); 
  
   if(window.confirm("Are you sure you want to delete this record?")){
-  const res = client.delete(`/api/delete-owner/${id}`);
+  const res = client.delete(`/api/Owners/${id}`);
   }
   }
   if(loading)
@@ -96,15 +96,15 @@ useEffect(()=>{
             return value;
           }
         }).map(item=>{return(
-            <tr key={item.id}>
+            <tr key={item.oidnumber}>
             <td>{item.oname}</td>
             <td>{item.osurname}</td>
             <td>{item.ocellnum}</td>
             <td>{item.omail}</td>
             <td>{item.opostal}</td>
-            <td>{petlist.map(value=>{if(item.oidnumber==value.oidnumber){return(<pre class="text-white">{value.pname}</pre>)}else{return <>No Pets</>}})}</td>
-            <td><span><Link to={`EditOwner/${item.id}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
-              <button onClick={e=>{deleteOwner(e, item.id)}} className="btn btn-danger"><i className="fa fa-trash " ></i></button></span></td>
+            <td>{petlist.map(value=>{if(item.oidnumber==value.oidnumber){return(<pre class="text-white">{value.pname}</pre>)}})}</td>
+            <td><span><Link to={`EditOwner/${item.oidnumber}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
+              <button onClick={e=>{deleteOwner(e, item.oidnumber)}} className="btn btn-danger"><i className="fa fa-trash " ></i></button></span></td>
           </tr>)
 })}
       </tbody>

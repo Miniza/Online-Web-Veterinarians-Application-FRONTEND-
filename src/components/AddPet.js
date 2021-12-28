@@ -4,43 +4,40 @@ import Swal from 'sweetalert2';
 import axios from 'axios'; 
 import Nav from './Nav';
 import Button from './Button';
-import PropTypes from 'prop-types';
-import propTypes from 'prop-types';
 
 const AddPet = () => {
 
 const [formInfo,setFormInfo] = useState({
-  pname:"",
-  pid:"",
-  ptype:"",
-  pbreed:"",
-  powner:"",
-  oidnumber: "",
-  pdob:""
+  Pname:"",
+  Pid:"",
+  Ptype:"",
+  Pbreed:"",
+  Powner:"",
+  Oidnumber: "",
+  Pdob:""
 });
 
-const client = axios.create({baseURL: 'http://localhost:8000/'})
+const client = axios.create({baseURL: 'http://localhost:5054/'})
 
 
 const handleFormSubmit = e => {
+  e.preventDefault();
   var data = new FormData();
-  data.append('pname', formInfo.pname);
-  data.append('pid', formInfo.pid);
-  data.append('ptype', formInfo.ptype);
-  data.append('pbreed', formInfo.pbreed);
-  data.append('powner', formInfo.powner);
-  data.append('oidnumber', formInfo.oidnumber);
-  data.append('pdob', formInfo.pdob);
-
+  data.append('Pname', formInfo.Pname);
+  data.append('Pid', formInfo.Pid);
+  data.append('Ptype', formInfo.Ptype);
+  data.append('Pbreed', formInfo.Pbreed);
+  data.append('Powner', formInfo.Powner);
+  data.append('Oidnumber', formInfo.Oidnumber);
+  data.append('Pdob', formInfo.Pdob);
+  //console.log(formInfo)
   const postData = async() =>{
-  const res = await client.post("/api/add-pets", data);
-  if(res.data.status===200){
+    const res = client.post('/api/Pets',data);
     Swal.fire({
       title: "Form Submitted successfully!",
       icon: "success",
       })
-  }
-  setFormInfo({pname:"",pid:"",ptype:"",pbreed:"",powner:"",oidnumber:"",pdob:""}) 
+  setFormInfo({Pname:"",Pid:"",Ptype:"",Pbreed:"",Powner:"",Oidnumber:"",Pdob:""}) 
   }
   postData();
 }
@@ -56,9 +53,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="pname"
-            value={formInfo.pname}
+            value={formInfo.Pname}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,pname:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,Pname:e.target.value})}
             placeholder="Enter Pet Name..."
             required
             />
@@ -69,9 +66,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="pidd"
-            value={formInfo.pid}
+            value={formInfo.Pid}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,pid:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,Pid:e.target.value})}
             placeholder="Enter Pet Unique Identifier or ID..."
             required
             />
@@ -83,9 +80,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="ptype"
-            value={formInfo.ptype}
+            value={formInfo.Ptype}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo, ptype:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo, Ptype:e.target.value})}
             placeholder="Enter Animal type..."
             required
             />
@@ -96,9 +93,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="breed"
-            value={formInfo.pbreed}
+            value={formInfo.Pbreed}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo, pbreed:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo, Pbreed:e.target.value})}
             placeholder="Enter Breed Type..."
             required
             />
@@ -109,9 +106,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="owner"
-            value={formInfo.powner}
+            value={formInfo.Powner}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,powner:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,Powner:e.target.value})}
             placeholder="Enter Pet Owner..."
             required
             />
@@ -122,9 +119,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="owner"
-            value={formInfo.oidnumber}
+            value={formInfo.Oidnumber}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,oidnumber:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,Oidnumber:e.target.value})}
             placeholder="Enter Owner ID Number..."
             required
             />
@@ -135,9 +132,9 @@ const handleFormSubmit = e => {
             <input
             type ="date"
             id="pbirth"
-            value={formInfo.pdob}
+            value={formInfo.Pdob}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,pdob:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,Pdob:e.target.value})}
             placeholder="Enter Pet Birth Date..."
             required
             />
@@ -149,14 +146,6 @@ const handleFormSubmit = e => {
 </React.Fragment>
   );
 }
-AddPet.propTypes = {
-  powner: PropTypes.string,
-  pid: propTypes.string,
-  pname: propTypes.string,
-  oidnumber: propTypes.string, //Please note i accept id number as string 
-  ptype: propTypes.string,
-  pbreed: propTypes.string,
-  pdob: propTypes.string
-};
+
 
 export default AddPet;
