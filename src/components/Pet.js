@@ -78,7 +78,7 @@ const deletePet = (e,id) => {
           return value
         }}).map(item=>{return(
             <tr key={item.id}>
-            <td><Link to={`SingleOwner/${item.Id}`}>{item.powner}</Link></td>
+            <td><Link to={`SingleOwner/${item.oidnumber}`}>{item.powner}</Link></td>
             <td>{item.pname}</td>
             <td>{item.ptype}</td>
             <td>{item.pbreed}</td>

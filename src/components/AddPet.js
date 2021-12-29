@@ -17,8 +17,7 @@ const [formInfo,setFormInfo] = useState({
   Pdob:""
 });
 
-const client = axios.create({baseURL: 'http://localhost:5054/'})
-
+const client = axios.create({baseURL: 'http://localhost:5054/'});
 
 const handleFormSubmit = e => {
   e.preventDefault();
@@ -35,7 +34,7 @@ const handleFormSubmit = e => {
     const res = client.post('/api/Pets',data);
     Swal.fire({
       title: "Form Submitted successfully!",
-      icon: "success",
+      icon: "success"
       })
   setFormInfo({Pname:"",Pid:"",Ptype:"",Pbreed:"",Powner:"",Oidnumber:"",Pdob:""}) 
   }
