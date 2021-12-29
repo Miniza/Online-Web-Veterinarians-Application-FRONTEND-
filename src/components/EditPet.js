@@ -45,7 +45,7 @@ const loadPet = async() => {
     text: "Owner Updated!",
     icon: "success"
     })
-    navigate("/Pets");
+    navigate("/Pet");
   }
   postData();
  }
