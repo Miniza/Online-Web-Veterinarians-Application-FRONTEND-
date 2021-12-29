@@ -83,7 +83,8 @@ const deletePet = (e,id) => {
             <td>{item.ptype}</td>
             <td>{item.pbreed}</td>
             <td>{item.pdob}</td>
-            <td><span><button onClick={e=>deletePet(e,item.id)} className="btn btn-danger"><i className="fa fa-trash"></i></button> </span></td>
+            <td><span><Link to={`EditPet/${item.id}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
+              <button onClick={e=>deletePet(e,item.id)} className="btn btn-danger"><i className="fa fa-trash"></i></button> </span></td>
           </tr>)
 })}
       </tbody>

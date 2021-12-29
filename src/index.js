@@ -8,6 +8,7 @@ import AddOwner from './components/AddOwner';
 import AddPet from './components/AddPet';
 import SingleOwner from './components/SingleOwner';
 import EditOwner from './components/EditOwner';
+import EditPet from './components/EditPet';
 import reportWebVitals from './reportWebVitals';
 
 const Routing = () =>{
@@ -20,6 +21,7 @@ const Routing = () =>{
     <Route path="/AddOwner" element={< AddOwner />} />
     <Route path="/AddPet" element={< AddPet />} />
     <Route path="Owner/EditOwner/:id" element={<EditOwner />} />
+    <Route path="Pet/EditPet/:id" element={<EditPet />} />
     <Route path="/Pet/SingleOwner/:id" element={<SingleOwner />} />
 
   </Routes>

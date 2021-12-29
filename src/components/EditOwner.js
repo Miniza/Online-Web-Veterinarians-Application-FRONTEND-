@@ -24,22 +24,18 @@ const loadOwner = async() => {
      loadOwner();
  },[navigate]);
 
-const handleInput = (e) => {
-    e.persist();
-    setOwner({...ownerInput, [e.target.name]: e.target.value });
-}
 
 
 
   const handleUpdate = e => {
   e.preventDefault();
   const data = {
-      Oname: ownerInput.Oname,
-      Osurname: ownerInput.Osurname,
-      Oidnumber: ownerInput.Oidnumber,
-      Ocellnum: ownerInput.Oidnumber,
-      Omail: ownerInput.Omail,
-      Opostal: ownerInput.Omail
+      Oname: ownerInput.oname,
+      Osurname: ownerInput.osurname,
+      Oidnumber: ownerInput.oidnumber,
+      Ocellnum: ownerInput.oidnumber,
+      Omail: ownerInput.omail,
+      Opostal: ownerInput.opostal
   }
 
   //console.log(formData); 
@@ -49,6 +45,7 @@ const handleInput = (e) => {
     text: "Owner Updated!",
     icon: "success"
     })
+  navigate("/Owner");
   }
   postData();
  }
@@ -77,7 +74,7 @@ const handleInput = (e) => {
             id="usurname"
             value={ownerInput.osurname}
             className="form-control"
-            onChange={handleInput}
+            onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner Surname..."
             required
             />
@@ -91,7 +88,7 @@ const handleInput = (e) => {
             id="idnum"
             value={ownerInput.oidnumber}
             className="form-control"
-            onChange={handleInput}
+            onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner ID number..."
             required
             />
@@ -104,7 +101,7 @@ const handleInput = (e) => {
             id="umobilenum"
             value={ownerInput.ocellnum}
             className="form-control"
-            onChange={handleInput}
+            onChange={e=>setOwner(e.target.value)}
             placeholder="Enter User Cellphone Number..."
             required
             />
@@ -117,7 +114,7 @@ const handleInput = (e) => {
             id="umail"
             value={ownerInput.omail}
             className="form-control"
-            onChange={handleInput}
+            onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner Email end email with @xyz.com e.g. mini@xyz.com"
             required
             />
@@ -130,7 +127,7 @@ const handleInput = (e) => {
             id="uaddress"
             value={ownerInput.opostal}
             className="form-control"
-            onChange={handleInput}
+            onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner Postal Address..."
             required
             />
