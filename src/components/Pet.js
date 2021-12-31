@@ -23,6 +23,7 @@ const loadPets = async() => {
   try{
     const res = await client.get('/api/Pets');
     setPetList(res.data);
+    setLoading(false);
     setError(null);
   } catch(err){
     setError(err.message);
@@ -30,10 +31,16 @@ const loadPets = async() => {
     setLoading(false);
   }
 }; 
-
+ 
 useEffect(()=>{
     loadPets();
 },[petlist]);
+
+if(loading){
+  Swal.fire({
+  text: 'Loading data from the server'
+  })
+}
 
 const deletePet = (e,id) => {
   e.preventDefault(); 
