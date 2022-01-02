@@ -1,19 +1,18 @@
-
 import React, {useState, useEffect} from 'react'; 
 import '../App.css';
-import Swal from 'sweetalert2'; 
 import axios from 'axios'; 
 import Nav from './Nav';
 import Button from './Button';
 import Header from './Header';
 import Search from './Search';
 import { Link } from 'react-router-dom';
+import OwnerList from './OwnerList';
 
 const Owner = () => {
 
 const [ownerlist, setOwnerlist] = useState([]);
 const [petlist, setPetList] = useState([]);
-const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
 
@@ -21,22 +20,22 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
 
 const loadOwner = async() => {
   try{
+    setLoading(true);
     const res = await client.get('/api/Owners');
       setOwnerlist(res.data);
+      setLoading(false);
       const resp = await client.get('/api/Pets');
       setPetList(resp.data);
-      setLoading(false);
+      
       setError(null);
   } catch(err){
     setError(err.message);
-  } finally{
-    setLoading(false);
   }
 }; 
 
 useEffect(()=>{
   loadOwner();
- },[ownerlist])
+ },[])
 
   const deleteOwner = (e,id) => {
   e.preventDefault(); 
@@ -45,13 +44,7 @@ useEffect(()=>{
   const res = client.delete(`/api/Owners/${id}`);
   }
   }
-  if(loading)
-  {
-    Swal.fire({
-      text: "Fetching Data From the Server, Please Wait!",
-      })
-  }
-
+ 
   return (
  <React.Fragment>
    <Nav/>
@@ -74,43 +67,12 @@ useEffect(()=>{
   <hr/>
   <div className="text-center text-white">
   <h4 className="row-form">Existing Pet Owners:</h4>
+  {
+    loading ? <h1>Fetching Data From Server Please Wait...</h1> : <>
+     <OwnerList ownerlist={ownerlist} searchvalue={searchvalue} deleteOwner={deleteOwner} petlist={petlist} />
+    </>
+  }
  
-  <div class="table-responsive">
-    <table class="table table-bordered text-white">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Surname</th>
-          <th>Phone Number</th>
-          <th>Email Address</th>
-          <th>Postal Address</th>
-          <th>PetList</th>
-          <th>Operation</th>
-        </tr>
-      </thead>
-      <tbody>
-        {ownerlist.filter(value=>{
-          if(searchvalue==""){ return value;
-          }else if(value.oname.toLocaleLowerCase().includes(searchvalue.toLocaleLowerCase())){
-            return value;
-          }
-        }).map(item=>{return(
-            <tr key={item.oidnumber}>
-            <td>{item.oname}</td>
-            <td>{item.osurname}</td>
-            <td>{item.ocellnum}</td>
-            <td>{item.omail}</td>
-            <td>{item.opostal}</td>
-            <td>{petlist.map(value=>{if(item.oidnumber==value.oidnumber){return(<pre class="text-white">{value.pname}</pre>)}})}</td>
-            <td><span> 
-            <Link to={`EditOwner/${item.oidnumber}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
-              <button onClick={e=>{deleteOwner(e, item.oidnumber)}} className="btn btn-danger"><i className="fa fa-trash " ></i></button></span></td>
-          </tr>)
-})}
-      </tbody>
-    </table>
-    
-  </div>
   </div>
   </div>
 </React.Fragment>
@@ -118,6 +80,4 @@ useEffect(()=>{
    
   );
 }
-
-
 export default Owner;
