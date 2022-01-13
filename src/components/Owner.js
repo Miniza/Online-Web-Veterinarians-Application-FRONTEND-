@@ -11,12 +11,11 @@ import OwnerList from './OwnerList';
 const Owner = () => {
 
 const [ownerlist, setOwnerlist] = useState([]);
-const [petlist, setPetList] = useState([]);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
 
-const client = axios.create({baseURL: 'http://localhost:5054/'});
+const client = axios.create({baseURL: 'https://localhost:7060/'});
 
 const loadOwner = async() => {
   try{
@@ -24,9 +23,6 @@ const loadOwner = async() => {
     const res = await client.get('/api/Owners');
       setOwnerlist(res.data);
       setLoading(false);
-      const resp = await client.get('/api/Pets');
-      setPetList(resp.data);
-      
       setError(null);
   } catch(err){
     setError(err.message);
@@ -35,7 +31,7 @@ const loadOwner = async() => {
 
 useEffect(()=>{
   loadOwner();
- },[])
+},[]);
 
   const deleteOwner = (e,id) => {
   e.preventDefault(); 
@@ -69,7 +65,7 @@ useEffect(()=>{
   <h4 className="row-form">Existing Pet Owners:</h4>
   {
     loading ? <h1>Fetching Data From Server Please Wait...</h1> : <>
-     <OwnerList ownerlist={ownerlist} searchvalue={searchvalue} deleteOwner={deleteOwner} petlist={petlist} />
+     <OwnerList ownerlist={ownerlist} searchvalue={searchvalue} deleteOwner={deleteOwner} />
     </>
   }
  

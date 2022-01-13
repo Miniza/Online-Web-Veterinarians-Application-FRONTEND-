@@ -18,15 +18,15 @@ const PetList = ({petlist, searchvalue, deletePet}) => {
           <tbody>
             {petlist.filter(value=>{if(searchvalue==""){
               return value
-            }else if(value.pname.toLocaleLowerCase().includes(searchvalue.toLocaleLowerCase())){
+            }else if(value.petName.toLocaleLowerCase().includes(searchvalue.toLocaleLowerCase())){
               return value
             }}).map(item=>{return(
                 <tr key={item.id}>
-                <td><Link to={`SingleOwner/${item.oidnumber}`}>{item.powner}</Link></td>
-                <td>{item.pname}</td>
-                <td>{item.ptype}</td>
-                <td>{item.pbreed}</td>
-                <td>{item.pdob}</td>
+                <td><Link to={`SingleOwner/${item.id}`}>{item.owner.firstName}</Link></td>
+                <td>{item.petName}</td>
+                <td>{item.petType}</td>
+                <td>{item.petBreed}</td>
+                <td>{item.dateOfBirth}</td>
                 <td><span><Link to={`EditPet/${item.id}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
                   <button onClick={e=>deletePet(e,item.id)} className="btn btn-danger"><i className="fa fa-trash"></i></button> </span></td>
               </tr>)

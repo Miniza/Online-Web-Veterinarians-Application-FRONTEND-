@@ -14,7 +14,7 @@ const navigate = useNavigate();
 const loadOwner = async() => {
     console.log(`hey ${params.id}`)
   
-     const res = await axios.get(`http://localhost:5054/api/Owners/${params.id}`);
+     const res = await axios.get(`https://localhost:7060/api/Owners/${params.id}`);
      setOwner(res.data);
      console.log(ownerInput);
  
@@ -35,7 +35,7 @@ const loadOwner = async() => {
             <input
             type ="text"
             id="uname"
-            value={ownerInput.oname}
+            value={ownerInput.firstName}
             className="form-control"
            
             />
@@ -46,30 +46,19 @@ const loadOwner = async() => {
             <input
             type ="text"
             id="usurname"
-            value={ownerInput.osurname}
+            value={ownerInput.lastName}
             className="form-control"
             
             />
             </div>
              
-             
-            <div className="form-group">
-            <label htmlFor="idnum" className ="form-label">ID number</label>
-            <input
-            type ="text"
-            id="idnum"
-            value={ownerInput.oidnumber}
-            className="form-control"
-            
-            />
-            </div>
 
             <div className="form-group">
             <label htmlFor="umobilenum" className ="form-label">Cellphone Number</label>
             <input
             type ="text"
             id="umobilenum"
-            value={ownerInput.ocellnum}
+            value={ownerInput.mobileNumber}
             className="form-control"
            
             />
@@ -80,7 +69,7 @@ const loadOwner = async() => {
             <input
             type ="email"
             id="umail"
-            value={ownerInput.omail}
+            value={ownerInput.ownerEmail}
             className="form-control"
       
             />
@@ -91,7 +80,7 @@ const loadOwner = async() => {
             <input
             type ="text"
             id="uaddress"
-            value={ownerInput.opostal}
+            value={ownerInput.address}
             className="form-control"
             />
             </div>

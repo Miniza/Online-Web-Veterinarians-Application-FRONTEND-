@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'; 
 import '../App.css'; 
 import { Link } from 'react-router-dom'; 
-import Swal from 'sweetalert2'; 
 import axios from 'axios'; 
 import Nav from './Nav';
 import Button from './Button';
@@ -16,7 +15,7 @@ const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
 
-const client = axios.create({baseURL: 'http://localhost:5054/'})
+const client = axios.create({baseURL: 'https://localhost:7060/'})
 
 const loadPets = async() => {
   try{

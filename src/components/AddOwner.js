@@ -4,34 +4,28 @@ import Swal from 'sweetalert2';
 import axios from 'axios'; 
 import Nav from './Nav';
 import Button from './Button';
-import PropTypes from 'prop-types';
-import propTypes from 'prop-types';
 
 const AddOwner = () => {
 
 const [formData, setFormData] = useState({
-  Oname:"",
-  Id: 1,
-  Osurname: "",
-  Oidnumber: "",
-  Ocellnum:"",
-  Omail:"",
-  Opostal: "",
+  firstName:"",
+  lastName: "",
+  mobileNumber: "",
+  ownerEmail:"",
+  address:"",
 });
 
 
-const client = axios.create({baseURL: 'http://localhost:5054/'});
+const client = axios.create({baseURL: 'https://localhost:7060/'});
 
   const handleFormSubmit = e => {
   e.preventDefault();
   var data = new FormData();
-  data.append('Oidnumber', formData.Oidnumber);
-  data.append('Id',formData.Id);
-  data.append('Oname', formData.Oname);
-  data.append('Osurname', formData.Osurname);
-  data.append('Ocellnum', formData.Ocellnum);
-  data.append('Omail', formData.Omail);
-  data.append('Opostal', formData.Opostal);
+  data.append('firstName', formData.firstName);
+  data.append('lastName',formData.lastName);
+  data.append('mobileNumber', formData.mobileNumber);
+  data.append('ownerEmail', formData.ownerEmail);
+  data.append('address', formData.address);
   //console.log(formData); 
   const postData = async() =>{
   const res = client.post('/api/Owners',data);
@@ -39,7 +33,7 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
     text: "Form Submitted!",
     icon: "success"
     })
-  setFormData({Oname:"",Osurname:"",Oidnumber:"",Ocellnum:"",Omail:"",Opostal:""});
+  setFormData({firstName:"",lastName:"",mobileNumber:"",ownerEmail:"",address:""});
   }
   postData();
  }
@@ -54,9 +48,9 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
             <input
             type ="text"
             id="uname"
-            value={formData.Oname}
+            value={formData.firstName}
             className="form-control"
-            onChange ={e=>setFormData({...formData, Oname:e.target.value})}
+            onChange ={e=>setFormData({...formData, firstName:e.target.value})}
             placeholder="Enter Owner Name..."
             required
             />
@@ -67,24 +61,10 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
             <input
             type ="text"
             id="usurname"
-            value={formData.Osurname}
+            value={formData.lastName}
             className="form-control"
-            onChange={e=>setFormData({...formData, Osurname:e.target.value})}
+            onChange={e=>setFormData({...formData, lastName:e.target.value})}
             placeholder="Enter owner Surname..."
-            required
-            />
-            </div>
-             
-             
-            <div className="form-group">
-            <label htmlFor="idnum" className ="form-label">ID number</label>
-            <input
-            type ="text"
-            id="idnum"
-            value={formData.Oidnumber}
-            className="form-control"
-            onChange={e=>setFormData({...formData, Oidnumber:e.target.value})}
-            placeholder="Enter owner ID number..."
             required
             />
             </div>
@@ -94,9 +74,9 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
             <input
             type ="text"
             id="umobilenum"
-            value={formData.Ocellnum}
+            value={formData.mobileNumber}
             className="form-control"
-            onChange={e=>setFormData({...formData, Ocellnum:e.target.value})}
+            onChange={e=>setFormData({...formData, mobileNumber:e.target.value})}
             placeholder="Enter User Cellphone Number..."
             required
             />
@@ -107,10 +87,10 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
             <input
             type ="email"
             id="umail"
-            value={formData.Omail}
+            value={formData.ownerEmail}
             className="form-control"
-            onChange={e=>setFormData({...formData, Omail:e.target.value})}
-            placeholder="Enter owner Email end email with @xyz.com e.g. mini@xyz.com"
+            onChange={e=>setFormData({...formData, ownerEmail:e.target.value})}
+            placeholder="Enter owner Email Address"
             required
             />
             </div>
@@ -120,9 +100,9 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
             <input
             type ="text"
             id="uaddress"
-            value={formData.Opostal}
+            value={formData.address}
             className="form-control"
-            onChange={e=>setFormData({...formData, Opostal:e.target.value})}
+            onChange={e=>setFormData({...formData, address:e.target.value})}
             placeholder="Enter owner Postal Address..."
             required
             />
@@ -136,13 +116,5 @@ const client = axios.create({baseURL: 'http://localhost:5054/'});
   );
 }
 
-AddOwner.propTypes = {
-  Oname: PropTypes.string,
-  Osurname: propTypes.string,
-  Oidnumber: propTypes.string, 
-  Ocellnum: propTypes.string,
-  Omail: propTypes.string,
-  Opostal: propTypes.string
-};
 
 export default AddOwner;

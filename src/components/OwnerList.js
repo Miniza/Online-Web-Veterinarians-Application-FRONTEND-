@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 
-const OwnerList = ({ownerlist, searchvalue, deleteOwner, petlist}) => {
+const OwnerList = ({ownerlist, searchvalue, deleteOwner}) => {
 
     return(
         <div class="table-responsive">
@@ -20,20 +20,20 @@ const OwnerList = ({ownerlist, searchvalue, deleteOwner, petlist}) => {
       <tbody>
         {ownerlist.filter(value=>{
           if(searchvalue==""){ return value;
-          }else if(value.oname.toLocaleLowerCase().includes(searchvalue.toLocaleLowerCase())){
+          }else if(value.firstName.toLocaleLowerCase().includes(searchvalue.toLocaleLowerCase())){
             return value;
           }
         }).map(item=>{return(
-            <tr key={item.oidnumber}>
-            <td>{item.oname}</td>
-            <td>{item.osurname}</td>
-            <td>{item.ocellnum}</td>
-            <td>{item.omail}</td>
-            <td>{item.opostal}</td>
-            <td>{petlist.map(value=>{if(item.oidnumber==value.oidnumber){return(<pre class="text-white">{value.pname}</pre>)}})}</td>
+            <tr key={item.id}>
+            <td>{item.firstName}</td>
+            <td>{item.lastName}</td>
+            <td>{item.mobileNumber}</td>
+            <td>{item.ownerEmail}</td>
+            <td>{item.address}</td>
+            <td>{item.pets.petName}</td>
             <td><span> 
-            <Link to={`EditOwner/${item.oidnumber}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
-              <button onClick={e=>{deleteOwner(e, item.oidnumber)}} className="btn btn-danger"><i className="fa fa-trash " ></i></button></span></td>
+            <Link to={`EditOwner/${item.id}`}><button className="btn btn-success"><i className="fa fa-edit"></i></button></Link>
+              <button onClick={e=>{deleteOwner(e, item.id)}} className="btn btn-danger"><i className="fa fa-trash " ></i></button></span></td>
           </tr>)
 })}
       </tbody>

@@ -8,27 +8,23 @@ import Button from './Button';
 const AddPet = () => {
 
 const [formInfo,setFormInfo] = useState({
-  Pname:"",
-  Pid:"",
-  Ptype:"",
-  Pbreed:"",
-  Powner:"",
-  Oidnumber: "",
-  Pdob:""
+  petName:"",
+  petType:"",
+  petBreed:"",
+  dateOfBirth:"",
+  ownerId:""
 });
 
-const client = axios.create({baseURL: 'http://localhost:5054/'});
+const client = axios.create({baseURL: 'https://localhost:7060/'});
 
 const handleFormSubmit = e => {
   e.preventDefault();
   var data = new FormData();
-  data.append('Pname', formInfo.Pname);
-  data.append('Pid', formInfo.Pid);
-  data.append('Ptype', formInfo.Ptype);
-  data.append('Pbreed', formInfo.Pbreed);
-  data.append('Powner', formInfo.Powner);
-  data.append('Oidnumber', formInfo.Oidnumber);
-  data.append('Pdob', formInfo.Pdob);
+  data.append('petName', formInfo.petName);
+  data.append('petType', formInfo.petType);
+  data.append('petBreed', formInfo.petBreed);
+  data.append('dateOfBirth', formInfo.dateOfBirth);
+  data.append('ownerId', formInfo.ownerId);
   //console.log(formInfo)
   const postData = async() =>{
     const res = client.post('/api/Pets',data);
@@ -36,7 +32,7 @@ const handleFormSubmit = e => {
       title: "Form Submitted successfully!",
       icon: "success"
       })
-  setFormInfo({Pname:"",Pid:"",Ptype:"",Pbreed:"",Powner:"",Oidnumber:"",Pdob:""}) 
+  setFormInfo({petName:"",petType:"",petBreed:"",dateOfBirth:"",ownerId:""}) 
   }
   postData();
 }
@@ -52,23 +48,10 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="pname"
-            value={formInfo.Pname}
+            value={formInfo.petName}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,Pname:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,petName:e.target.value})}
             placeholder="Enter Pet Name..."
-            required
-            />
-            </div>
-             
-            <div className="form-group">
-            <label for="pidd" className ="form-label">Pet unique ID (5 digits)</label>
-            <input
-            type ="text"
-            id="pidd"
-            value={formInfo.Pid}
-            className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,Pid:e.target.value})}
-            placeholder="Enter Pet Unique Identifier or ID..."
             required
             />
             </div>
@@ -79,9 +62,9 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="ptype"
-            value={formInfo.Ptype}
+            value={formInfo.petType}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo, Ptype:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo, petType:e.target.value})}
             placeholder="Enter Animal type..."
             required
             />
@@ -92,52 +75,44 @@ const handleFormSubmit = e => {
             <input
             type ="text"
             id="breed"
-            value={formInfo.Pbreed}
+            value={formInfo.petBreed}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo, Pbreed:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo, petBreed:e.target.value})}
             placeholder="Enter Breed Type..."
             required
             />
             </div>
-
-            <div className="form-group">
-            <label for="owner" className ="form-label">Pet Owner</label>
-            <input
-            type ="text"
-            id="owner"
-            value={formInfo.Powner}
-            className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,Powner:e.target.value})}
-            placeholder="Enter Pet Owner..."
-            required
-            />
-            </div>
        
-            <div className="form-group">
-            <label for="owner" className ="form-label">Owner ID Number</label>
-            <input
-            type ="text"
-            id="owner"
-            value={formInfo.Oidnumber}
-            className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,Oidnumber:e.target.value})}
-            placeholder="Enter Owner ID Number..."
-            required
-            />
-            </div>
 
             <div className="form-group">
             <label for="pbirth" className ="form-label">Birth Date</label>
             <input
             type ="date"
             id="pbirth"
-            value={formInfo.Pdob}
+            value={formInfo.dateOfBirth}
             className="form-control"
-            onChange ={e=>setFormInfo({...formInfo,Pdob:e.target.value})}
+            onChange ={e=>setFormInfo({...formInfo,dateOfBirth:e.target.value})}
             placeholder="Enter Pet Birth Date..."
             required
             />
             </div>
+            
+
+            <div className="form-group">
+            <label for="ownerid" className ="form-label">Owner Id (1 Digit)</label>
+            <input
+            type ="text"
+            id="ownerid"
+            value={formInfo.ownerId}
+            className="form-control"
+            onChange ={e=>setFormInfo({...formInfo,ownerId:e.target.value})}
+            placeholder="Enter Owner Id..."
+            required
+            />
+            </div>
+
+
+
 
             <Button style="btn btn-primary" text="Submit" />
           </form>

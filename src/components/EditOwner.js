@@ -15,7 +15,7 @@ const navigate = useNavigate();
 const loadOwner = async() => {
     console.log(`hey ${params.id}`)
   
-     const res = await axios.get(`http://localhost:5054/api/Owners/${params.id}`);
+     const res = await axios.get(`https://localhost:7060/api/Owners/${params.id}`);
      setOwner(res.data);
      console.log(ownerInput);
  
@@ -30,17 +30,16 @@ const loadOwner = async() => {
   const handleUpdate = e => {
   e.preventDefault();
   const data = {
-      Oname: ownerInput.oname,
-      Osurname: ownerInput.osurname,
-      Oidnumber: ownerInput.oidnumber,
-      Ocellnum: ownerInput.oidnumber,
-      Omail: ownerInput.omail,
-      Opostal: ownerInput.opostal
+      firstName: ownerInput.firstName,
+      lastName: ownerInput.lastName,
+      mobileNumber: ownerInput.mobileNumber,
+      ownerEmail: ownerInput.ownerEmail,
+      address: ownerInput.address
   }
 
   //console.log(formData); 
   const postData = async() =>{
-  const res = axios.put(`http://localhost:5054/api/Owners/${params.id}`,data);
+  const res = axios.put(`https://localhost:7060/api/Owners/${params.id}`,data);
   Swal.fire({
     text: "Owner Updated!",
     icon: "success"
@@ -60,7 +59,7 @@ const loadOwner = async() => {
             <input
             type ="text"
             id="uname"
-            value={ownerInput.oname}
+            value={ownerInput.firstName}
             className="form-control"
             onChange ={e=>setOwner(e.target.value)}
             required
@@ -72,7 +71,7 @@ const loadOwner = async() => {
             <input
             type ="text"
             id="usurname"
-            value={ownerInput.osurname}
+            value={ownerInput.lastName}
             className="form-control"
             onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner Surname..."
@@ -80,26 +79,13 @@ const loadOwner = async() => {
             />
             </div>
              
-             
-            <div className="form-group">
-            <label htmlFor="idnum" className ="form-label">ID number</label>
-            <input
-            type ="text"
-            id="idnum"
-            value={ownerInput.oidnumber}
-            className="form-control"
-            onChange={e=>setOwner(e.target.value)}
-            placeholder="Enter owner ID number..."
-            required
-            />
-            </div>
 
             <div className="form-group">
             <label htmlFor="umobilenum" className ="form-label">Cellphone Number</label>
             <input
             type ="text"
             id="umobilenum"
-            value={ownerInput.ocellnum}
+            value={ownerInput.mobileNumber}
             className="form-control"
             onChange={e=>setOwner(e.target.value)}
             placeholder="Enter User Cellphone Number..."
@@ -112,7 +98,7 @@ const loadOwner = async() => {
             <input
             type ="email"
             id="umail"
-            value={ownerInput.omail}
+            value={ownerInput.ownerEmail}
             className="form-control"
             onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner Email end email with @xyz.com e.g. mini@xyz.com"
@@ -125,7 +111,7 @@ const loadOwner = async() => {
             <input
             type ="text"
             id="uaddress"
-            value={ownerInput.opostal}
+            value={ownerInput.address}
             className="form-control"
             onChange={e=>setOwner(e.target.value)}
             placeholder="Enter owner Postal Address..."
