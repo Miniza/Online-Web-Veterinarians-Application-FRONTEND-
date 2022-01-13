@@ -7,6 +7,7 @@ const PetList = ({petlist, searchvalue, deletePet}) => {
         <table class="table table-bordered text-white">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Owner</th>
               <th>Pet Name</th>
               <th>Pet Type</th>
@@ -22,6 +23,7 @@ const PetList = ({petlist, searchvalue, deletePet}) => {
               return value
             }}).map(item=>{return(
                 <tr key={item.id}>
+                <td>{item.id}</td>
                 <td><Link to={`SingleOwner/${item.id}`}>{item.owner.firstName}</Link></td>
                 <td>{item.petName}</td>
                 <td>{item.petType}</td>
