@@ -14,7 +14,7 @@ const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
 
-const client = axios.create({baseURL: 'https://localhost:7060/'});
+const client = axios.create({baseURL: 'http://localhost:5000/'});
 
 const loadOwner = async() => {
   try{
@@ -56,12 +56,14 @@ useEffect(()=>{
   <Search type="text"
    style="form-control"
    placeholder="Start filtering by owner name"
-   onChange = {e=>setSearchvalue(e.target.value)} />
+   onChange = {e=>setSearchvalue(e.target.value)} 
+   />
 
-  <hr/>
+  <hr />
   <div className="text-center text-white">
   <h4 className="row-form">Existing Pet Owners:</h4>
   {
+  
     loading ? <h1>Fetching Data From Server Please Wait...</h1> : <>
      <OwnerList ownerlist={ownerlist} searchvalue={searchvalue} deleteOwner={deleteOwner} />
     </>

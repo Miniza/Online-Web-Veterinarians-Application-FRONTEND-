@@ -15,7 +15,7 @@ const navigate = useNavigate();
 const loadOwner = async() => {
     console.log(`hey ${params.id}`)
   
-     const res = await axios.get(`https://localhost:7060/api/Owners/${params.id}`);
+     const res = await axios.get(`http://localhost:5000/api/Owners/${params.id}`);
      setOwner(res.data);
      console.log(ownerInput);
  

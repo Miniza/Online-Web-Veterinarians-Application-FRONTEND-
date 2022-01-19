@@ -15,10 +15,10 @@ if(!loggedIn)
 nav = (
     <ul className="navbar-nav">  
     <li className="nav-item">
-    <NavLink className="nav-link" to="/" activeClassName="activeItem">Login</NavLink> 
+    <NavLink className="nav-link" to="/" activeClassName="activeItem">LOGIN</NavLink> 
     </li>
     <li className="nav-item">
-    <NavLink className="nav-link" to="/Register" activeClassName="activeItem">Register</NavLink> 
+    <NavLink className="nav-link" to="/Register" activeClassName="activeItem">REGISTER</NavLink> 
     </li> 
     </ul>
 )

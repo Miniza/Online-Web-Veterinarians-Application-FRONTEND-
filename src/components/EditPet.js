@@ -15,7 +15,7 @@ const navigate = useNavigate();
 const loadPet = async() => {
     console.log(`hey ${params.id}`)
   
-     const res = await axios.get(`https://localhost:7060/api/Pets/${params.id}`);
+     const res = await axios.get(`http://localhost:5000/api/Pets/${params.id}`);
      setPet(res.data);
  
  }; 
