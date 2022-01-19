@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'; 
 import '../App.css';
 import axios from 'axios'; 
-import Nav from './Nav';
 import Button from './Button';
 import Header from './Header';
 import Search from './Search';
@@ -43,7 +42,6 @@ useEffect(()=>{
  
   return (
  <React.Fragment>
-   <Nav/>
 
   <div className="jumbotron">
   <Header style="text-center text-white" text="Owner Details Page" />

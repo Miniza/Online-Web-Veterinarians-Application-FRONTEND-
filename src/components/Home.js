@@ -3,7 +3,7 @@ import React from 'react';
 import Button from "./Button";
 import Header from "./Header";
 
-const Home = () => {
+const Home = ({user}) => {
 
 return(
  <React.Fragment>
@@ -39,6 +39,11 @@ return(
   
   <hr/>
  </div>
+ </div>
+ <div className="jumbotron">
+<div className="text-white text-center">
+<>You are logged in as: {user}</>
+</div>
  </div>
 </React.Fragment>
  )

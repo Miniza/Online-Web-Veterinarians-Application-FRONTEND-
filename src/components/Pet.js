@@ -43,7 +43,6 @@ const deletePet = (e,id) => {
 
   return (
    <React.Fragment>
-  <Nav />
   <div className="jumbotron">
   <Header style="text-center text-white" text="Pet Details Page" />
   <div className="text-center">

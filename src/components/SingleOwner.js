@@ -25,7 +25,6 @@ const loadOwner = async() => {
 
   return (
  <React.Fragment>
-   <Nav/>
    <div className='jumbotron text-white'>
    <Header style="text-center text-white" text="Owner Details" />
   <form>
