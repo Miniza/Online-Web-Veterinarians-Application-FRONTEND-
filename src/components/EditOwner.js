@@ -5,27 +5,20 @@ import Swal from 'sweetalert2';
 import Nav from './Nav';
 import Button from './Button';
 
-
 const EditOwner = () => {
-
 const [ownerInput, setOwner] = useState([]);
 const params = useParams();
 const navigate = useNavigate();
 
 const loadOwner = async() => {
     console.log(`hey ${params.id}`)
-  
      const res = await axios.get(`http://localhost:5000/api/Owners/${params.id}`);
      setOwner(res.data);
      console.log(ownerInput);
- 
  }; 
  useEffect(()=>{
      loadOwner();
  },[navigate]);
-
-
-
 
   const handleUpdate = e => {
   e.preventDefault();

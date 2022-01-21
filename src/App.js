@@ -10,10 +10,9 @@ import AddPet from './components/AddPet';
 import SingleOwner from './components/SingleOwner';
 import EditOwner from './components/EditOwner';
 import EditPet from './components/EditPet';
-import Login from './components/Login';
-import Register from './components/Register';
 import Nav from './components/Nav';
-
+import Login from './Authentication/Login';
+import Register from './Authentication/Register';
 
 
 const App = () => {
