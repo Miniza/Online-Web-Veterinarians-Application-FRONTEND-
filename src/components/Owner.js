@@ -77,8 +77,9 @@ const paginate = pageNumbers => setCurrentPage(pageNumbers)
      <OwnerList ownerlist={currentOwners} searchvalue={searchvalue} deleteOwner={deleteOwner} />
     </>
   }
-  <Pagination ownersPerPage={ownersPerPage} totalOwners={ownerlist.length} paginate={paginate}/>
  
+  <Pagination itemsPerPage={ownersPerPage} totalItems={ownerlist.length} paginate={paginate} GoTo={"/Owner"}/>
+
   </div>
   </div>
 </React.Fragment>

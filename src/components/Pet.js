@@ -7,6 +7,7 @@ import Header from './Header';
 import Search from './Search';
 import PetList from './PetList';
 import { client } from '../Api/Api';
+import Pagination from './Pagination';
 
 const Pet = () => {
 
@@ -14,6 +15,8 @@ const [petlist, setPetList] = useState([]);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
+const [currentPage, setCurrentPage] = useState(1);
+const [petsPerPage] = useState(2);
 
 const loadPets = async() => {
   try{
@@ -30,7 +33,13 @@ const loadPets = async() => {
 useEffect(()=>{
     loadPets();
 },[]);
+//pagination stuff
+const indexOfLastPet = currentPage*petsPerPage;
+const indexOfFirstPet = indexOfLastPet - petsPerPage;
+const currentPets = petlist.slice(indexOfFirstPet, indexOfLastPet);
 
+//change page
+const paginate = pageNumbers => setCurrentPage(pageNumbers)
 
 const deletePet = (e,id) => {
   e.preventDefault(); 
@@ -58,10 +67,10 @@ const deletePet = (e,id) => {
   <h4 className="text-center text-white">Existing Pets</h4>
   {
     loading ? <h2>Fetching Data From Server. Please Wait..</h2> : <>
-    <PetList petlist={petlist} searchvalue={searchvalue} deletePet={deletePet} />
+    <PetList petlist={currentPets} searchvalue={searchvalue} deletePet={deletePet} />
     </>
   }
-
+  <Pagination itemsPerPage={petsPerPage} totalItems={petlist.length} paginate={paginate} GoTo={"/Pet"}/>
   </div>
   </div>
 

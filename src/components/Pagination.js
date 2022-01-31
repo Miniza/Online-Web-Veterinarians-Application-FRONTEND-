@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 
-const Pagination = ({ ownersPerPage, totalOwners, paginate}) => {
+
+const Pagination = ({ itemsPerPage, totalItems, paginate, GoTo}) => {
     const pageNumbers = [];
-
-    for(let i=1; i<=Math.ceil(totalOwners/ownersPerPage); i++){
+    for(let i=1; i<=Math.ceil(totalItems/itemsPerPage); i++){
         pageNumbers.push(i);
     }
     return(
-        <nav>
-       <ul className="pagination ">
+       <nav>
+       <ul className="pagination">
        {pageNumbers.map(number =>(
-           <li key={number} className="page-item">
-           <Link onClick={()=> paginate(number)} to="/Owner" className="page-link">{number}</Link>
-           </li>
+       <li key={number} className="page-item">
+           <NavLink onClick={()=> paginate(number)} to={GoTo} className="page-link">{number}</NavLink>
+       </li>
        ))}
        </ul>
-        </nav>
+       </nav>
     )
 }
 
