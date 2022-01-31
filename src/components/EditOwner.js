@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import axios from 'axios';
+import { client } from '../Api/Api';
 import Swal from 'sweetalert2'; 
 import Nav from './Nav';
 import Button from './Button';
@@ -12,7 +12,7 @@ const navigate = useNavigate();
 
 const loadOwner = async() => {
     console.log(`hey ${params.id}`)
-     const res = await axios.get(`http://localhost:5000/api/Owners/${params.id}`);
+     const res = await client.get(`/api/Owners/${params.id}`);
      setOwner(res.data);
      console.log(ownerInput);
  }; 
@@ -32,7 +32,7 @@ const loadOwner = async() => {
 
   //console.log(formData); 
   const postData = async() =>{
-  const res = axios.put(`https://localhost:7060/api/Owners/${params.id}`,data);
+  const res = client.put(`/api/Owners/${params.id}`,data);
   Swal.fire({
     text: "Owner Updated!",
     icon: "success"

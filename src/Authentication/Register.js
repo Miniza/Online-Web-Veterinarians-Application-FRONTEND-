@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom';
+import { client } from '../Api/Api';
 
 const Register = () => {
 
@@ -11,8 +11,6 @@ const Register = () => {
       });
     
     const Navigate = useNavigate();
-
-    const client = axios.create({baseURL: 'http://localhost:5000/'});
 
     const HandleSubmit = e => {
         e.preventDefault();

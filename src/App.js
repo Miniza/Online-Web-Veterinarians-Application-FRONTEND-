@@ -1,7 +1,6 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import {useState,useEffect} from 'react';
-import axios from 'axios'; 
 import Home from './components/Home';
 import Owner from './components/Owner';
 import Pet from './components/Pet';
@@ -13,14 +12,12 @@ import EditPet from './components/EditPet';
 import Nav from './components/Nav';
 import Login from './Authentication/Login';
 import Register from './Authentication/Register';
-
+import { client } from './Api/Api';
 
 const App = () => {
   
 const [user,setUser] = useState("");
 const [loggedIn, setLoggedIn] = useState(false);
-
-const client = axios.create({withCredentials:true, baseURL: 'http://localhost:5000/'});
 
 const FetchUser = async() =>{
 const res = await client.get("api/Auth/user");

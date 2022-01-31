@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
-import axios from 'axios'; 
+import { client } from '../Api/Api';
 
 const Nav=({loggedIn, setLoggedIn}) =>{
-const client = axios.create({withCredentials:true, baseURL: 'http://localhost:5000/'});
 
 const Logout = async() =>{
     const res = await client.post('/api/Auth/logout');

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import axios from 'axios';
 import Header from './Header'; 
-import Nav from './Nav';
+import { client } from '../Api/Api';
 
 
 const SingleOwner = () => {
@@ -14,7 +13,7 @@ const navigate = useNavigate();
 const loadOwner = async() => {
     console.log(`hey ${params.id}`)
   
-     const res = await axios.get(`https://localhost:7060/api/Owners/${params.id}`);
+     const res = await client.get(`/api/Owners/${params.id}`);
      setOwner(res.data);
      console.log(ownerInput);
  

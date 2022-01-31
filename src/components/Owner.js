@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'; 
 import '../App.css';
-import axios from 'axios'; 
 import Button from './Button';
 import Header from './Header';
 import Search from './Search';
 import { Link } from 'react-router-dom';
 import OwnerList from './OwnerList';
+import { client } from '../Api/Api';
+import Pagination from './Pagination';
 
 const Owner = () => {
 
@@ -13,8 +14,8 @@ const [ownerlist, setOwnerlist] = useState([]);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
-
-const client = axios.create({baseURL: 'http://localhost:5000/'});
+const [currentPage, setCurrentPage] = useState(1);
+const [ownersPerPage] = useState(2);
 
 const loadOwner = async() => {
   try{
@@ -31,6 +32,14 @@ const loadOwner = async() => {
 useEffect(()=>{
   loadOwner();
 },[]);
+
+//Get Current Owners
+const indexOfLastOwner = currentPage*ownersPerPage;
+const indexOfFirstOwner = indexOfLastOwner-ownersPerPage;
+const currentOwners = ownerlist.slice(indexOfFirstOwner, indexOfLastOwner);
+
+//change page
+const paginate = pageNumbers => setCurrentPage(pageNumbers)
 
   const deleteOwner = (e,id) => {
   e.preventDefault(); 
@@ -65,9 +74,10 @@ useEffect(()=>{
   {
   
     loading ? <h1>Fetching Data From Server Please Wait...</h1> : <>
-     <OwnerList ownerlist={ownerlist} searchvalue={searchvalue} deleteOwner={deleteOwner} />
+     <OwnerList ownerlist={currentOwners} searchvalue={searchvalue} deleteOwner={deleteOwner} />
     </>
   }
+  <Pagination ownersPerPage={ownersPerPage} totalOwners={ownerlist.length} paginate={paginate}/>
  
   </div>
   </div>

@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom';
+import { client } from '../Api/Api';
 
 const Login = ({setLoggedIn}) => {
 
@@ -10,8 +10,6 @@ const Login = ({setLoggedIn}) => {
       });
 
     const Navigate = useNavigate();
-
-    const client = axios.create({withCredentials:true, baseURL: 'http://localhost:5000/'});
 
     const HandleSubmit = e => {
         e.preventDefault();

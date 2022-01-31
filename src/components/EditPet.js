@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import axios from 'axios';
+import { client } from '../Api/Api';
 import Swal from 'sweetalert2'; 
 import Nav from './Nav';
 import Button from './Button';
@@ -15,7 +15,7 @@ const navigate = useNavigate();
 const loadPet = async() => {
     console.log(`hey ${params.id}`)
   
-     const res = await axios.get(`http://localhost:5000/api/Pets/${params.id}`);
+     const res = await client.get(`/api/Pets/${params.id}`);
      setPet(res.data);
  
  }; 
@@ -40,7 +40,7 @@ const loadPet = async() => {
 
   //console.log(formData); 
   const postData = async() =>{
-  const res = axios.put(`http://localhost:5054/api/Pets/${params.id}`,data);
+  const res = client.put(`/api/Pets/${params.id}`,data);
   Swal.fire({
     text: "Owner Updated!",
     icon: "success"

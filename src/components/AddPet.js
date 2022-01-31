@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'; 
 import '../App.css'; 
 import Swal from 'sweetalert2'; 
-import axios from 'axios'; 
 import Nav from './Nav';
 import Button from './Button';
+import { client } from '../Api/Api';
 
 const AddPet = () => {
 
@@ -14,8 +14,6 @@ const [formInfo,setFormInfo] = useState({
   dateOfBirth:"",
   ownerId:""
 });
-
-const client = axios.create({baseURL: 'http://localhost:5000/'});
 
 const handleFormSubmit = e => {
   e.preventDefault();

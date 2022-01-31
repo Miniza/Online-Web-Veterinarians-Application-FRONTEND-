@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import '../App.css'; 
 import { Link } from 'react-router-dom'; 
 import axios from 'axios'; 
-import Nav from './Nav';
 import Button from './Button';
 import Header from './Header';
 import Search from './Search';
 import PetList from './PetList';
+import { client } from '../Api/Api';
 
 const Pet = () => {
 
@@ -14,8 +14,6 @@ const [petlist, setPetList] = useState([]);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 const [searchvalue, setSearchvalue] = useState("");
-
-const client = axios.create({baseURL: 'http://localhost:5000/'})
 
 const loadPets = async() => {
   try{
