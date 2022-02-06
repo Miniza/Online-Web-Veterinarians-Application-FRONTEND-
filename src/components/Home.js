@@ -2,8 +2,23 @@ import { Link } from "react-router-dom";
 import React from 'react';
 import Button from "./Button";
 import Header from "./Header";
+import { client } from '../Api/Api';
+import { IsLoggedContext } from "../Contexts/IsLoggedContext";
+import { useContext, useState, useEffect } from "react";
 
-const Home = ({user}) => {
+const Home = () => {
+
+    const [user,setUser] = useState("");
+    const [loggedIn, setLoggedIn] = useContext(IsLoggedContext);
+    
+    const FetchUser = async() =>{
+    const res = await client.get("api/Auth/user");
+    setLoggedIn(true)
+    setUser(res.data.name);
+    }
+    useEffect(()=>
+    FetchUser()
+    );
 
 return(
  <React.Fragment>

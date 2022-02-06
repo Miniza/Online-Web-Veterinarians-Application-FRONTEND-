@@ -1,8 +1,10 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { client } from '../Api/Api';
+import { IsLoggedContext } from "../Contexts/IsLoggedContext";
 
-const Login = ({setLoggedIn}) => {
+const Login = () => {
+    const [loggedIn, setLoggedIn] = useContext(IsLoggedContext)
 
     const [formData, setFormData] = useState({
         Email: "", 

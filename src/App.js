@@ -12,30 +12,17 @@ import EditPet from './components/EditPet';
 import Nav from './components/Nav';
 import Login from './Authentication/Login';
 import Register from './Authentication/Register';
-import { client } from './Api/Api';
+import { IsLoggedProvider} from './Contexts/IsLoggedContext';
 
 const App = () => {
-  
-const [user,setUser] = useState("");
-const [loggedIn, setLoggedIn] = useState(false);
-
-const FetchUser = async() =>{
-const res = await client.get("api/Auth/user");
-setLoggedIn(true)
-setUser(res.data.name);
-}
-useEffect(()=>
-FetchUser()
-);
 
   return (  
-    <React.Fragment>
-    <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-
+    <IsLoggedProvider>
+    <Nav  />
     <Routes>
-    <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
+    <Route path="/" element={<Login />} />
     <Route path="/Register" element={<Register />} />
-    <Route path="/Home" element={<Home user={user} />} />
+    <Route path="/Home" element={<Home />} />
     <Route path="/Owner" element={<Owner />} />
     <Route path="/Pet" element={<Pet />} />
     <Route path="/AddOwner" element={< AddOwner />} />
@@ -44,7 +31,7 @@ FetchUser()
     <Route path="Pet/EditPet/:id" element={<EditPet />} />
     <Route path="/Pet/SingleOwner/:id" element={<SingleOwner />} />
     </Routes>
-    </React.Fragment>
+    </IsLoggedProvider>
 
   );
 }

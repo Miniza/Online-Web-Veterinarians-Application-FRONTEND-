@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { client } from '../Api/Api';
+import { IsLoggedContext } from "../Contexts/IsLoggedContext";
+import { useContext } from "react";
 
-const Nav=({loggedIn, setLoggedIn}) =>{
+const Nav=() =>{
+const [loggedIn,setLoggedIn] = useContext(IsLoggedContext);
 
 const Logout = async() =>{
     const res = await client.post('/api/Auth/logout');
